@@ -2,13 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlashQuiz.Modifier"
-             Title="Modifier"
-             BackgroundColor="AntiqueWhite"
-             NavigationPage.IconColor="Black">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#EEE6D8"
+             NavigationPage.IconColor="#EEE6D8">
+    <NavigationPage.TitleView>
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+            <Label Text="Modifier" TextColor="White" HorizontalOptions="Center"/>
+            <Label Text="Modifier" TextColor="White" HorizontalOptions="End"/>
+        </HorizontalStackLayout>
+    </NavigationPage.TitleView>
+
+    <ListView x:Name="cardsListView"  Margin="40,40,40,0" SeparatorVisibility="None" RowHeight="160" SelectionMode="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <VerticalStackLayout BackgroundColor="#DAAB3A" HeightRequest="150" Padding="20,20,20,0">
+                        <Entry Text="{Binding Terme}" TextColor="White"  />
+                    </VerticalStackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

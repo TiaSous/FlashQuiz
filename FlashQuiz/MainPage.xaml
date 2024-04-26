@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlashQuiz.MainPage"
-             BackgroundColor="AntiqueWhite"
+             BackgroundColor="#EEE6D8"
              NavigationPage.HasNavigationBar="False">
 
     <ScrollView>
@@ -10,16 +10,18 @@
             <Image Source="logo.png"/>
             <Button
                 Text="Jouer"
-                BackgroundColor="Orange"
+                BackgroundColor="#DAAB3A"
                 WidthRequest="250"
                 FontSize="40"
-                Margin="0,0,0,20"/>
+                Margin="0,0,0,20"
+                CornerRadius="500"/>
             <Button
                 Text="Modifier" 
                 Clicked="ModifyClicked"
-                BackgroundColor="Orange"
+                BackgroundColor="#DAAB3A"
                 WidthRequest="250"
-                FontSize="40"/>
+                FontSize="40"
+                CornerRadius="500"/>
         </FlexLayout>
     </ScrollView>
 
