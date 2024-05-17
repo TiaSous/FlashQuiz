@@ -20,8 +20,13 @@ namespace FlashQuiz.ViewModels
         [ObservableProperty]
         private ObservableCollection<Card> cards = new ObservableCollection<Card>() {};
 
+        // dernière id de carte dans la db
         private int lastIdDb = -1;
+
+        // dernière id de carte dans l'application
         private int lastId = -1;
+
+        // list de carte retirer
         private List<Card> cardRemoved = new List<Card>();
 
         public ModifierViewModel()
@@ -38,7 +43,7 @@ namespace FlashQuiz.ViewModels
 
         }
         
-
+        // permet d'aller chercher les cartes dans la db 
         private void RefreshCards(FlashQuizzContext? context = null)
         {
             Cards.Clear();
@@ -53,6 +58,7 @@ namespace FlashQuiz.ViewModels
             }
         }
 
+        // lorsqu'il appuie sur le boutton +, cela va ajouter une carte dans l'application
         [RelayCommand]
         private void CreateCard()
         {
@@ -60,18 +66,21 @@ namespace FlashQuiz.ViewModels
             Cards.Add(new Card {Id=lastId});
         }
 
+        // détruit la carte
         [RelayCommand]
-        private async Task DeleteCard(Card card)
+        private void DeleteCard(Card card)
         {
             cardRemoved.Add(card);
             Cards.Remove(card);
         }
 
+        // quand il clique sur save
         [RelayCommand]
         private async Task ButtonSave() 
         {
             using (var dbContext = new FlashQuizzContext())
             {
+                // permet d'ajouter les cartes à la db
                 foreach (var card in Cards)
                 {
                     if (card.Id > lastIdDb)
@@ -89,10 +98,10 @@ namespace FlashQuiz.ViewModels
                         var dbCard = dbContext.Find<Card>(card.Id);
                         dbCard.Definition = card.Definition;
                         dbCard.Terme = card.Terme;
-                        //await dbContext.Cards.Where(dbCard => dbCard.Id == card.Id).ExecuteUpdateAsync(setters => setters.SetProperty(dbCard => dbCard.Definition, card.Definition));
                     }
                 }
 
+                // détruit les cartes
                 foreach (var card in cardRemoved)
                 {
                     await dbContext.Cards.Where(dbwish => dbwish.Id == card.Id).ExecuteDeleteAsync();
@@ -103,6 +112,7 @@ namespace FlashQuiz.ViewModels
             
         }
 
+        // ajoute les carte dans la db
         private async Task CreateCardDB(Card card)
         {
             using(var dbContext = new FlashQuizzContext())

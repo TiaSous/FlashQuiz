@@ -11,6 +11,7 @@
         <viewModels:ModifierViewModel x:Name="vm" />
     </ContentPage.BindingContext>
 
+    <!--hpage title-->
     <NavigationPage.TitleView>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -26,7 +27,7 @@
                    VerticalOptions="Center"
                    Grid.Column="0" />
 
-            <Button Text="Test"
+            <Button Text="Save"
                     BackgroundColor="Aqua"
                     HorizontalOptions="End"
                     VerticalOptions="Center"
@@ -41,11 +42,19 @@
             <CollectionView Margin="40,40,40,0" SelectionMode="None" ItemsSource="{Binding Cards}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <VerticalStackLayout BackgroundColor="#DAAB3A" HeightRequest="150" Padding="20,5,20,0" Margin="0,0,0,40">
+                        <VerticalStackLayout BackgroundColor="#DAAB3A" Padding="20,5,20,10" Margin="0,0,0,40">
                             <Entry Text="{Binding Terme}" TextColor="White" />
                             <Label Text="Terme" FontSize="10" Padding="4,0,0,0" />
                             <Entry Text="{Binding Definition}" TextColor="White"  Margin="0,10,0,0"/>
                             <Label Text="Definition" FontSize="10" Padding="4,0,0,0" />
+                            <Button Text="Delete" BackgroundColor="#C8A653"
+                                CornerRadius="50"
+                                WidthRequest="70"
+                                HeightRequest="35"
+                                FontSize="Micro" 
+                                HorizontalOptions="End"
+                                Command="{Binding Source={x:Reference vm}, Path=DeleteCardCommand}" 
+                                CommandParameter="{Binding .}" />
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

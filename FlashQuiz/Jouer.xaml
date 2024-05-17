@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlashQuiz.Jouer"
+             xmlns:viewModels="clr-namespace:FlashQuiz.ViewModels"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
+             Title="Jouer"
+             BackgroundColor="#EEE6D8"
+             NavigationPage.IconColor="#EEE6D8">
+
+    <ContentPage.BindingContext>
+        <viewModels:JouerViewModel x:Name="vm" />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout>
+        <!--juste et faux-->
+        <FlexLayout JustifyContent="SpaceBetween">
+            <Label Text="{Binding NotValidate}" TextColor="#CF4C4C"/>
+            <Label Text="{Binding Validate}" TextColor="#55DD26"/>
+        </FlexLayout>
+        <FlexLayout x:Name="CardValueOutside" HeightRequest="400" WidthRequest="350" HorizontalOptions="Center">
+            <Button HorizontalOptions="Center" VerticalOptions="Center" x:Name="CardValue"
+                HeightRequest="400" WidthRequest="350" BackgroundColor="#DAAB3A" Text="{Binding WordShow}" TextColor="White" FontSize="25" Command="{Binding ChangeSideCardCommand}"/>
+        </FlexLayout>
+        <Button 
+            Text="✓" BackgroundColor="#C8A653"
+            CornerRadius="50"
+            HeightRequest="50"
+            WidthRequest="50"
+            FontSize="Large"
+            Command="{Binding ValidateCardCommand}"
+            HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>

@@ -10,6 +10,7 @@
             <Image Source="logo.png"/>
             <Button
                 Text="Jouer"
+                Clicked="JouerClicked"
                 BackgroundColor="#DAAB3A"
                 WidthRequest="250"
                 FontSize="40"
