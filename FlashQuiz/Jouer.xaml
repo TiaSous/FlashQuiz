@@ -14,14 +14,11 @@
         <viewModels:JouerViewModel x:Name="vm" />
     </ContentPage.BindingContext>
 
-    <Shell.TitleView>
-        <Label Text="{Binding NombreDeCarte}"
-       TextColor="White"
-       HorizontalOptions="Center"
-       VerticalOptions="Center" />
-    </Shell.TitleView>
-
     <VerticalStackLayout>
+        <Label Text="{Binding NombreDeCarte}"
+        TextColor="#DAAB3A"
+        HorizontalOptions="Center"
+        VerticalOptions="Center" />
         <!--juste et faux-->
         <FlexLayout JustifyContent="SpaceBetween">
             <Label Text="{Binding NotValidate}" TextColor="#CF4C4C"/>
