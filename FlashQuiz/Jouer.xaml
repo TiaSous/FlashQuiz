@@ -6,11 +6,20 @@
              xmlns:s="clr-namespace:System;assembly=mscorlib"
              Title="Jouer"
              BackgroundColor="#EEE6D8"
-             NavigationPage.IconColor="#EEE6D8">
+             NavigationPage.IconColor="#EEE6D8"
+             Shell.BackgroundColor="#DAAB3A"
+             Shell.NavBarIsVisible="False">
 
     <ContentPage.BindingContext>
         <viewModels:JouerViewModel x:Name="vm" />
     </ContentPage.BindingContext>
+
+    <Shell.TitleView>
+        <Label Text="{Binding NombreDeCarte}"
+       TextColor="White"
+       HorizontalOptions="Center"
+       VerticalOptions="Center" />
+    </Shell.TitleView>
 
     <VerticalStackLayout>
         <!--juste et faux-->
@@ -29,6 +38,11 @@
             WidthRequest="50"
             FontSize="Large"
             Command="{Binding ValidateCardCommand}"
+            HorizontalOptions="Center"/>
+        <Button 
+            Text="Arrêter" BackgroundColor="#C8A653"
+            FontSize="Large"
+            Command="{Binding StopGameCommand}"
             HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>

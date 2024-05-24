@@ -2,15 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlashQuiz.MainPage"
+             xmlns:viewModels="clr-namespace:FlashQuiz.ViewModels"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
              BackgroundColor="#EEE6D8"
-             NavigationPage.HasNavigationBar="False">
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel />
+    </ContentPage.BindingContext>
 
     <ScrollView>
         <FlexLayout Direction="Column" AlignItems="Center">
             <Image Source="logo.png"/>
             <Button
                 Text="Jouer"
-                Clicked="JouerClicked"
+                Command="{Binding JouerClickedCommand}"
                 BackgroundColor="#DAAB3A"
                 WidthRequest="250"
                 FontSize="40"
@@ -18,7 +24,7 @@
                 CornerRadius="500"/>
             <Button
                 Text="Modifier" 
-                Clicked="ModifyClicked"
+                Command="{Binding ModifyClickedCommand}"
                 BackgroundColor="#DAAB3A"
                 WidthRequest="250"
                 FontSize="40"

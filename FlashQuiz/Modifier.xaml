@@ -5,14 +5,15 @@
              xmlns:viewModels="clr-namespace:FlashQuiz.ViewModels"
              xmlns:s="clr-namespace:System;assembly=mscorlib"
              BackgroundColor="#EEE6D8"
-             NavigationPage.IconColor="#EEE6D8">
+             NavigationPage.IconColor="#EEE6D8"
+             Shell.BackgroundColor="#DAAB3A">
 
     <ContentPage.BindingContext>
         <viewModels:ModifierViewModel x:Name="vm" />
     </ContentPage.BindingContext>
 
     <!--hpage title-->
-    <NavigationPage.TitleView>
+    <Shell.TitleView>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -35,7 +36,7 @@
                     Margin="10" 
                     Command="{Binding ButtonSaveCommand}"/>
         </Grid>
-    </NavigationPage.TitleView>
+    </Shell.TitleView>
 
     <ScrollView>
         <StackLayout>

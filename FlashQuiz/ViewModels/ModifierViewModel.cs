@@ -109,7 +109,7 @@ namespace FlashQuiz.ViewModels
                 await dbContext.SaveChangesAsync();
             }
             cardRemoved.Clear();
-            
+            await Shell.Current.Navigation.PopAsync();
         }
 
         // ajoute les carte dans la db

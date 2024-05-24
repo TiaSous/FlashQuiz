@@ -7,7 +7,6 @@ public partial class Jouer : ContentPage
     public Jouer()
     {
         InitializeComponent();
-
         var vm = BindingContext as JouerViewModel;
         vm.RotateCardUIAction = RotateUI;
     }
@@ -16,7 +15,6 @@ public partial class Jouer : ContentPage
     {
         this.CardValue.RotateYTo(angle);
         this.CardValueOutside.RotateYTo(angle);
-
     }
 
     protected override void OnDisappearing()
