@@ -137,7 +137,7 @@ namespace FlashQuiz.ViewModels
             actualCard += 1;
             if(actualCard == nombreCarteTotal && cardsNotKnow.Count == 0)
             {
-               await Finish(cardsNotKnow);
+               await Finish(cards);
             }
             else if (actualCard == nombreCarteTotal && cardsNotKnow.Count != 0)
             {
