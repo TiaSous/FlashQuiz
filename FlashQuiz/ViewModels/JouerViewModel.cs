@@ -95,7 +95,14 @@ namespace FlashQuiz.ViewModels
         [RelayCommand]
         private void ChangeSideCard()
         {
-            angle = angle == 0 ? 180 : 0;
+            if(angle == 0)
+            {
+                angle = 180;
+            }
+            else
+            {
+                angle = 0;
+            }
             RotationCard(angle);
             WordShow = isTerme == true ? cards[actualCard].Definition : cards[actualCard].Terme;
             isTerme = isTerme == true ? false : true;
@@ -107,7 +114,7 @@ namespace FlashQuiz.ViewModels
         {
             Validate += 1;
             cardsKnow += 1;
-            ChangeCard();
+            await ChangeCard();
         }
 
         // lorsqu'il secoue le téléphone met la carte dans non appris
@@ -132,7 +139,7 @@ namespace FlashQuiz.ViewModels
             NombreDeCarte = (actualCard + 1).ToString() + "/" + nombreCarteTotal;
         }
 
-        private async void ChangeCard()
+        private async Task ChangeCard()
         {
             actualCard += 1;
             if(actualCard == nombreCarteTotal && cardsNotKnow.Count == 0)

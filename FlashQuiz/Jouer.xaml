@@ -24,9 +24,9 @@
             <Label Text="{Binding NotValidate}" TextColor="#CF4C4C"/>
             <Label Text="{Binding Validate}" TextColor="#55DD26"/>
         </FlexLayout>
-        <FlexLayout x:Name="CardValueOutside" HeightRequest="400" WidthRequest="350" HorizontalOptions="Center">
-            <Button HorizontalOptions="Center" VerticalOptions="Center" x:Name="CardValue"
-                HeightRequest="400" WidthRequest="350" BackgroundColor="#DAAB3A" Text="{Binding WordShow}" TextColor="White" FontSize="25" Command="{Binding ChangeSideCardCommand}"/>
+        <FlexLayout x:Name="CardValueOutside" HeightRequest="300" WidthRequest="245" HorizontalOptions="Center" Margin="0,0,0, 100">
+            <Button HorizontalOptions="Center" x:Name="CardValue"
+                HeightRequest="300" WidthRequest="240" BackgroundColor="#DAAB3A" Text="{Binding WordShow}" TextColor="White" FontSize="25" Command="{Binding ChangeSideCardCommand}"/>
         </FlexLayout>
         <Button 
             Text="✓" BackgroundColor="#C8A653"
