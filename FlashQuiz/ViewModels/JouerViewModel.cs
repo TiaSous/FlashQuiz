@@ -49,7 +49,9 @@ namespace FlashQuiz.ViewModels
 
         public Action<int>? RotateCardUIAction { set; private get; }
 
+        public IDispatcherTimer timer = Application.Current.Dispatcher.CreateTimer();
 
+        private int totalSeconds = 0;
         public JouerViewModel()
         {
             try
@@ -63,6 +65,9 @@ namespace FlashQuiz.ViewModels
                 nombreCarteTotal = cards.Count;
                 totalCardAtStart = cards.Count;
                 MiseAJourNombre();
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.Tick += OnTimerTick;
+                timer.Start();
             }
             catch (Exception ex)
             {
@@ -116,13 +121,19 @@ namespace FlashQuiz.ViewModels
             cardsKnow += 1;
             await ChangeCard();
         }
-
-        // lorsqu'il secoue le téléphone met la carte dans non appris
-        private void Accelerometer_ShakeDetected(object? sender, EventArgs e)
+        // carte non apprises
+        [RelayCommand]
+        private async Task NotValidateCard()
         {
             NotValidate += 1;
             cardsNotKnow.Add(cards[actualCard]);
-            ChangeCard();
+            await ChangeCard();
+        }
+
+        // lorsqu'il secoue le téléphone met la carte dans non appris
+        private async void Accelerometer_ShakeDetected(object? sender, EventArgs e)
+        {
+            await NotValidateCard();
         }
 
         // pour la rotation de la carte
@@ -163,8 +174,9 @@ namespace FlashQuiz.ViewModels
         {
             double number = (double)cardsKnow / totalCardAtStart * 100;
             int pourcentageConnu = (int)Math.Round(number);
-    
-            await Shell.Current.Navigation.PushModalAsync(new Resultat(cards, pourcentageConnu));
+            timer.Stop();
+
+            await Shell.Current.Navigation.PushModalAsync(new Resultat(cards, pourcentageConnu, totalSeconds, cardsKnow));
         }
 
         private void RefreshGame()
@@ -190,6 +202,11 @@ namespace FlashQuiz.ViewModels
         private async Task StopGame()
         {
             await Finish(cardsNotKnow);
+        }
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            totalSeconds++;
         }
     }
 }

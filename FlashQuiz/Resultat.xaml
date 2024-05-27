@@ -5,27 +5,32 @@
              BackgroundColor="#EEE6D8"
              >
 
-    <ScrollView>
         <StackLayout>
+            <Label x:Name="Timer" Margin="40,40,0,0" TextColor="#DAAB3A" />
             <Label x:Name="PourcentageText" Margin="40,40,0,0" TextColor="#DAAB3A"/>
+            <FlexLayout Margin="40,40,0,0" JustifyContent="Start">
+                <Label x:Name="Connu" TextColor="#55DD26" Margin="0,0,20,0"/>
+                <Label x:Name="Erreur" TextColor="#CF4C4C"/>
+            </FlexLayout>
             <Label Text="Carte(s) la(les) plus difficile(s)" Margin="40,40,0,0" TextColor="#DAAB3A"/>
-            <CollectionView x:Name="cardsCollectionView" Margin="40,10,40,0" SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout BackgroundColor="#DAAB3A" Padding="20,5,20,10" Margin="0,0,0,40">
-                            <Entry Text="{Binding Terme}" TextColor="White" IsReadOnly="True" />
-                            <Label Text="Terme" FontSize="10" Padding="4,0,0,0" />
-                            <Entry Text="{Binding Definition}" TextColor="White"  Margin="0,10,0,0" IsReadOnly="True" />
-                            <Label Text="Definition" FontSize="10" Padding="4,0,0,0" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <ScrollView HeightRequest="400" Margin="40,10,40,50">
+                <CollectionView x:Name="cardsCollectionView" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout BackgroundColor="#DAAB3A" Padding="20,5,20,10" Margin="0,0,0,40">
+                                <Entry Text="{Binding Terme}" TextColor="White" IsReadOnly="True" />
+                                <Label Text="Terme" FontSize="10" Padding="4,0,0,0" />
+                                <Entry Text="{Binding Definition}" TextColor="White"  Margin="0,10,0,0" IsReadOnly="True" />
+                                <Label Text="Definition" FontSize="10" Padding="4,0,0,0" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
             <Button 
                  Text="Retour" BackgroundColor="#C8A653"
                  FontSize="Large"
                  Clicked="Button_Clicked"
                  HorizontalOptions="Center"/>
         </StackLayout>
-    </ScrollView>
 </ContentPage>

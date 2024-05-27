@@ -18,24 +18,63 @@
         <Label Text="{Binding NombreDeCarte}"
         TextColor="#DAAB3A"
         HorizontalOptions="Center"
-        VerticalOptions="Center" />
+        VerticalOptions="Center" 
+        FontSize="Title"
+               Margin="0,15,0,5"/>
         <!--juste et faux-->
-        <FlexLayout JustifyContent="SpaceBetween">
-            <Label Text="{Binding NotValidate}" TextColor="#CF4C4C"/>
-            <Label Text="{Binding Validate}" TextColor="#55DD26"/>
+        <FlexLayout JustifyContent="SpaceBetween" Margin="0,0,0,50">
+            <Border BackgroundColor="Transparent"
+                    Stroke="#CF4C4C"
+                    StrokeThickness="4"
+                    Padding="30,0,10,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    TranslationX="-5">
+                <Border.StrokeShape>
+                    <RoundRectangle
+                CornerRadius="0,20,0,20"/>
+                </Border.StrokeShape>
+                <Label Text="{Binding NotValidate}" TextColor="#CF4C4C" FontSize="Large"/>
+            </Border>
+
+            <Border BackgroundColor="Transparent"
+                    Stroke="#55DD26"
+                    StrokeThickness="4"
+                    Padding="10,0,30,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    TranslationX="5">
+                <Border.StrokeShape>
+                    <RoundRectangle
+                    CornerRadius="20,0,20,0"/>
+                </Border.StrokeShape>
+                <Label Text="{Binding Validate}" TextColor="#55DD26" FontSize="Large"/>
+            </Border>
         </FlexLayout>
-        <FlexLayout x:Name="CardValueOutside" HeightRequest="300" WidthRequest="245" HorizontalOptions="Center" Margin="0,0,0, 100">
+        <FlexLayout x:Name="CardValueOutside" HeightRequest="400" WidthRequest="305" HorizontalOptions="Center" Margin="0,0,0,50">
             <Button HorizontalOptions="Center" x:Name="CardValue"
-                HeightRequest="300" WidthRequest="240" BackgroundColor="#DAAB3A" Text="{Binding WordShow}" TextColor="White" FontSize="25" Command="{Binding ChangeSideCardCommand}"/>
+                HeightRequest="400" WidthRequest="300" BackgroundColor="#DAAB3A" Text="{Binding WordShow}" CornerRadius="20" TextColor="White" FontSize="25" Command="{Binding ChangeSideCardCommand}"/>
         </FlexLayout>
-        <Button 
-            Text="✓" BackgroundColor="#C8A653"
-            CornerRadius="50"
-            HeightRequest="50"
-            WidthRequest="50"
-            FontSize="Large"
-            Command="{Binding ValidateCardCommand}"
-            HorizontalOptions="Center"/>
+        <FlexLayout JustifyContent="SpaceEvenly">
+
+            <Button 
+                Text="X" BackgroundColor="#C8A653"
+                CornerRadius="50"
+                HeightRequest="50"
+                WidthRequest="50"
+                FontSize="Large"
+                Command="{Binding NotValidateCardCommand}"
+                HorizontalOptions="Center"/>
+            <Button 
+                Text="✓" BackgroundColor="#C8A653"
+                CornerRadius="50"
+                HeightRequest="50"
+                WidthRequest="50"
+                FontSize="Large"
+                Command="{Binding ValidateCardCommand}"
+                HorizontalOptions="Center"/>
+        </FlexLayout>
+
         <Button 
             Text="Arrêter" BackgroundColor="#C8A653"
             FontSize="Large"

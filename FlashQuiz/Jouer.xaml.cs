@@ -13,8 +13,8 @@ public partial class Jouer : ContentPage
 
     private void RotateUI(int angle)
     {
-        this.CardValue.RotateYTo(angle);
         this.CardValueOutside.RotateYTo(angle);
+        this.CardValue.RotateYTo(angle);
     }
 
     protected override void OnDisappearing()

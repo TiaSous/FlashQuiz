@@ -7,8 +7,7 @@ public partial class Resultat : ContentPage
 {
 	private List<Card> cardsNotKnow = new List<Card>();
 
-    private int pourcentageConnu;
-    public Resultat(List<Card> cardsNotKnowImport, int pourcentageConnu)
+    public Resultat(List<Card> cardsNotKnowImport, int pourcentageConnu, int timer, int cardsKnow)
 	{
 		InitializeComponent();
 		if(cardsNotKnowImport != null )
@@ -18,7 +17,9 @@ public partial class Resultat : ContentPage
                 cardsNotKnow.Add(card);
             }
         }
-
+        Connu.Text = "Connu : " + cardsKnow.ToString();
+        Erreur.Text = "Erreur : " + cardsNotKnow.Count.ToString();
+        Timer.Text = "Temps prix : " + timer.ToString() + " secondes";
         PourcentageText.Text = "Mémorisation des cartes : " +pourcentageConnu.ToString() + "%";
         cardsCollectionView.ItemsSource = cardsNotKnow;
     }
