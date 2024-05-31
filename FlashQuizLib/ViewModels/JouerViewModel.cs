@@ -53,16 +53,20 @@ namespace FlashQuiz.ViewModels
 
         private int totalSeconds = 0;
 
+        Random random = new Random();
+
+        private int randomcard = 0;
+
         public JouerViewModel()
         {
             try
             {
                 RefreshCards();
-                
                 actualCard = 0;
-                WordShow = cards[actualCard].Terme;
                 isTerme = true;
                 nombreCarteTotal = cards.Count;
+                randomcard = random.Next(nombreCarteTotal);
+                WordShow = cards[randomcard].Terme;
                 totalCardAtStart = cards.Count;
                 MiseAJourNombre();
                 Accelerometer.Default.ShakeDetected += Accelerometer_ShakeDetected;
@@ -112,7 +116,7 @@ namespace FlashQuiz.ViewModels
                 angle = 0;
             }
             RotationCard(angle);
-            WordShow = isTerme == true ? cards[actualCard].Definition : cards[actualCard].Terme;
+            WordShow = isTerme == true ? cards[randomcard].Definition : cards[randomcard].Terme;
             isTerme = isTerme == true ? false : true;
         }
 
@@ -130,7 +134,7 @@ namespace FlashQuiz.ViewModels
         private async Task NotValidateCard()
         {
             NotValidate += 1;
-            cardsNotKnow.Add(cards[actualCard]);
+            cardsNotKnow.Add(cards[randomcard]);
             await ChangeCard();
         }
 
@@ -159,6 +163,8 @@ namespace FlashQuiz.ViewModels
         private async Task ChangeCard()
         {
             actualCard += 1;
+            cards.RemoveAt(randomcard);
+            randomcard = random.Next(cards.Count);
             if(actualCard == nombreCarteTotal && cardsNotKnow.Count == 0)
             {
                cards.Clear();
@@ -170,7 +176,7 @@ namespace FlashQuiz.ViewModels
             }
             else
             {
-                WordShow = cards[actualCard].Terme;
+                WordShow = cards[randomcard].Terme;
                 isTerme = true;
                 MiseAJourNombre();
             }
@@ -199,9 +205,10 @@ namespace FlashQuiz.ViewModels
             }
             cardsNotKnow.Clear();
             actualCard = 0;
-            WordShow = cards[actualCard].Terme;
             isTerme = true;
             nombreCarteTotal = cards.Count;
+            randomcard = random.Next(nombreCarteTotal);
+            WordShow = cards[randomcard].Terme;
             MiseAJourNombre();
             NotValidate = 0;
             Validate = 0;  
