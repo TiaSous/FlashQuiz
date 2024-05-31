@@ -17,13 +17,14 @@ namespace FlashQuiz.ViewModels.Tests
         {
             // Arrange
             var vm = new JouerViewModel();
+            Card card = new Card { Id = 1, Definition = "avoir", Terme = "haben" };
 
             // Act
-            vm.cardsNotKnow.Add(new Card { Id = 1, Definition = "avoir", Terme = "haben" });
+            vm.cardsNotKnow.Add(card);
             vm.RefreshGame();
 
             // Assert
-            Assert.AreEqual(vm.cards.Count(), 1);
+            Assert.AreEqual(vm.cards.First(), card);
         }
     }
 }

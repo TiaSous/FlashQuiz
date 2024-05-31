@@ -18,7 +18,7 @@ namespace FlashQuiz.ViewModels.Tests
             // Arrange
             var vm = new ModifierViewModel();
             Card card = new Card { Id = 1, Definition = "avoir", Terme = "haben" };
-            Card card2 = new Card { Id = 2, Definition = "avoir", Terme = "haben" };
+            Card card2 = new Card { Id = 2, Definition = "être", Terme = "sein" };
 
             // Act
             vm.Cards.Add(card);
@@ -27,7 +27,7 @@ namespace FlashQuiz.ViewModels.Tests
 
 
             // Assert
-            Assert.AreEqual(vm.Cards.Count(), 1);
+            Assert.AreEqual(vm.Cards.First(), card2);
         }
 
         [TestMethod()]
