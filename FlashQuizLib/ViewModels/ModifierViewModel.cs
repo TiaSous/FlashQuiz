@@ -60,7 +60,7 @@ namespace FlashQuiz.ViewModels
 
         // lorsqu'il appuie sur le boutton +, cela va ajouter une carte dans l'application
         [RelayCommand]
-        private void CreateCard()
+        public void CreateCard()
         {
             lastId += 1;
             Cards.Add(new Card {Id=lastId});
@@ -68,7 +68,7 @@ namespace FlashQuiz.ViewModels
 
         // détruit la carte
         [RelayCommand]
-        private void DeleteCard(Card card)
+        public void DeleteCard(Card card)
         {
             cardRemoved.Add(card);
             Cards.Remove(card);

@@ -69,15 +69,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Jouer.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Modifier.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Resultat.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+	  <ProjectReference Include="..\FlashQuizLib\FlashQuizLib.csproj" />
 	</ItemGroup>
 
 </Project>

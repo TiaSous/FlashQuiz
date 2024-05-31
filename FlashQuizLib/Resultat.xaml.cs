@@ -7,6 +7,7 @@ public partial class Resultat : ContentPage
 {
 	private List<Card> cardsNotKnow = new List<Card>();
 
+    // pour afficher les résultat sur la page
     public Resultat(List<Card> cardsNotKnowImport, int pourcentageConnu, int timer, int cardsKnow)
 	{
 		InitializeComponent();
@@ -24,6 +25,7 @@ public partial class Resultat : ContentPage
         cardsCollectionView.ItemsSource = cardsNotKnow;
     }
 
+    // veut retourner en arrière
     private async void Button_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.Navigation.PopToRootAsync();

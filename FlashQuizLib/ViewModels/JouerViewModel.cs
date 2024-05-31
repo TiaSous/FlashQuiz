@@ -28,9 +28,9 @@ namespace FlashQuiz.ViewModels
 
         private int totalCardAtStart;
 
-        private List<Card> cards = new List<Card>();        // liste des cartes
+        public List<Card> cards = new List<Card>();        // liste des cartes 
 
-        private List<Card> cardsNotKnow = new List<Card>(); // Liste des cartes non connus
+        public List<Card> cardsNotKnow = new List<Card>(); // Liste des cartes non connus
 
         private int cardsKnow = 0;                          // Nombre de cartes connus
 
@@ -40,7 +40,7 @@ namespace FlashQuiz.ViewModels
 
         private bool isTerme;                               // définit s'il affiche le terme ou la définition
 
-        private int angle = 0;                              // quel est l'angle actuelle de la carte (0 ou 180)
+        public int angle = 0;                              // quel est l'angle actuelle de la carte (0 ou 180) (il est en public pour les test)
 
         [ObservableProperty]
         private string nombreDeCarte;
@@ -49,29 +49,32 @@ namespace FlashQuiz.ViewModels
 
         public Action<int>? RotateCardUIAction { set; private get; }
 
-        public IDispatcherTimer timer = Application.Current.Dispatcher.CreateTimer();
+        public IDispatcherTimer timer;
 
         private int totalSeconds = 0;
+
         public JouerViewModel()
         {
             try
             {
                 RefreshCards();
+                
                 actualCard = 0;
                 WordShow = cards[actualCard].Terme;
                 isTerme = true;
-                Accelerometer.Default.ShakeDetected += Accelerometer_ShakeDetected;
-                Accelerometer.Default.Start(SensorSpeed.Default);
                 nombreCarteTotal = cards.Count;
                 totalCardAtStart = cards.Count;
                 MiseAJourNombre();
+                Accelerometer.Default.ShakeDetected += Accelerometer_ShakeDetected;
+                Accelerometer.Default.Start(SensorSpeed.Default);
+                timer = Application.Current.Dispatcher.CreateTimer();
                 timer.Interval = TimeSpan.FromSeconds(1);
                 timer.Tick += OnTimerTick;
                 timer.Start();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.InnerException);
+                NoCards();
             }
         }
 
@@ -98,7 +101,7 @@ namespace FlashQuiz.ViewModels
 
         // lorsque la carte est retournée
         [RelayCommand]
-        private void ChangeSideCard()
+        public void ChangeSideCard()
         {
             if(angle == 0)
             {
@@ -121,6 +124,7 @@ namespace FlashQuiz.ViewModels
             cardsKnow += 1;
             await ChangeCard();
         }
+
         // carte non apprises
         [RelayCommand]
         private async Task NotValidateCard()
@@ -145,16 +149,19 @@ namespace FlashQuiz.ViewModels
             }
         }
 
-        private void MiseAJourNombre()
+        // met à jour le champ qui affiche le carte actuel / nombre total
+        public void MiseAJourNombre()
         {
             NombreDeCarte = (actualCard + 1).ToString() + "/" + nombreCarteTotal;
         }
 
+        // lorsqu'il change de carte
         private async Task ChangeCard()
         {
             actualCard += 1;
             if(actualCard == nombreCarteTotal && cardsNotKnow.Count == 0)
             {
+               cards.Clear();
                await Finish(cards);
             }
             else if (actualCard == nombreCarteTotal && cardsNotKnow.Count != 0)
@@ -170,6 +177,7 @@ namespace FlashQuiz.ViewModels
             
         }
 
+        // lorsqu'il a finit
         private async Task Finish(List<Card> cards)
         {
             double number = (double)cardsKnow / totalCardAtStart * 100;
@@ -179,7 +187,8 @@ namespace FlashQuiz.ViewModels
             await Shell.Current.Navigation.PushModalAsync(new Resultat(cards, pourcentageConnu, totalSeconds, cardsKnow));
         }
 
-        private void RefreshGame()
+        // lorsqu'il a finit la liste et qu'il ne connaît pas les cartes remet tous à zéro avec une nouvelle liste
+        public void RefreshGame()
         {
             cards.Clear();
             cardsNotKnowFinal.Clear();
@@ -198,15 +207,24 @@ namespace FlashQuiz.ViewModels
             Validate = 0;  
         }
 
+        // lorsqu'il décide de finir le jeu lui même
         [RelayCommand]
         private async Task StopGame()
         {
             await Finish(cardsNotKnow);
         }
 
+        // écoule le timer
         private void OnTimerTick(object sender, EventArgs e)
         {
             totalSeconds++;
+        }
+
+        // s'il n'y a pas de carte
+        private async Task NoCards()
+        {
+            await Shell.Current.DisplayAlert("Acune Carte", "Vous n'avez aucune carte", "Retour");
+            await Shell.Current.Navigation.PopAsync();
         }
     }
 }

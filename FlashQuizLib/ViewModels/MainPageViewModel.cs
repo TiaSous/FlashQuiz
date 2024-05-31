@@ -17,12 +17,14 @@ namespace FlashQuiz.ViewModels
 {
     public partial class MainPageViewModel: ObservableObject
     {
+        // veux aller dans la page modifier
         [RelayCommand]
         private async Task ModifyClicked()
         {
             await Shell.Current.Navigation.PushAsync(new Modifier());
         }
 
+        // veux aller dans la page jouer
         [RelayCommand]
         private async Task JouerClicked()
         {
