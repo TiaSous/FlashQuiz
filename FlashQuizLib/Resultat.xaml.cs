@@ -20,7 +20,7 @@ public partial class Resultat : ContentPage
         }
         Connu.Text = "Connu : " + cardsKnow.ToString();
         Erreur.Text = "Erreur : " + cardsNotKnow.Count.ToString();
-        Timer.Text = "Temps prix : " + timer.ToString() + " secondes";
+        Timer.Text = "Temps pris : " + timer.ToString() + " secondes";
         PourcentageText.Text = "Mémorisation des cartes : " +pourcentageConnu.ToString() + "%";
         cardsCollectionView.ItemsSource = cardsNotKnow;
     }

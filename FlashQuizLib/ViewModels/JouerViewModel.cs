@@ -36,7 +36,7 @@ namespace FlashQuiz.ViewModels
 
         private List<Card> cardsNotKnowFinal = new List<Card>(); // liste des cartes non connus qui sera envoyée dans le résultat
 
-        private int actualCard;                             // numéro de placement de la cart actuelle
+        private int actualCard;                             // nombre de carte actuellement
 
         private bool isTerme;                               // définit s'il affiche le terme ou la définition
 
