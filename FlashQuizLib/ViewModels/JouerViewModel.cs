@@ -26,7 +26,7 @@ namespace FlashQuiz.ViewModels
         [ObservableProperty]
         private int notValidate = 0;                        // nombre de mot non validé
 
-        private int totalCardAtStart;
+        private int totalCardAtStart;                       // nombre de carte total depuis le début
 
         public List<Card> cards = new List<Card>();        // liste des cartes 
 
@@ -36,26 +36,26 @@ namespace FlashQuiz.ViewModels
 
         private List<Card> cardsNotKnowFinal = new List<Card>(); // liste des cartes non connus qui sera envoyée dans le résultat
 
-        private int actualCard;                             // nombre de carte actuellement
+        private int actualCard;                             // nombre de carte actuellement jouer
 
         private bool isTerme;                               // définit s'il affiche le terme ou la définition
 
         public int angle = 0;                              // quel est l'angle actuelle de la carte (0 ou 180) (il est en public pour les test)
 
         [ObservableProperty]
-        private string nombreDeCarte;
+        private string nombreDeCarte;                       // text (carte actuel / nombre total carte)
 
-        private int nombreCarteTotal;
+        private int nombreCarteTotal;                       // nombre de carte total selon le refresh
 
-        public Action<int>? RotateCardUIAction { set; private get; }
+        public Action<int>? RotateCardUIAction { set; private get; }    // action de rotation
 
-        public IDispatcherTimer timer;
+        public IDispatcherTimer timer;                      // timer
 
-        private int totalSeconds = 0;
+        private int totalSeconds = 0;                       // nombre total de secondes écouler
+                
+        Random random = new Random();                       // random pour la carte suivante
 
-        Random random = new Random();
-
-        private int randomcard = 0;
+        private int randomcard = 0;                         // permet de faire l'aléatoire lorsque on joue (séléction des cartes)
 
         public JouerViewModel()
         {
@@ -91,6 +91,7 @@ namespace FlashQuiz.ViewModels
                 Accelerometer.Default.ShakeDetected -= Accelerometer_ShakeDetected;
             }
         }
+        // va chercher les cartes dans la db
         private void RefreshCards(FlashQuizzContext? context = null)
         {
             cards.Clear();
